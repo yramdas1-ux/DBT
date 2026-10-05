@@ -1,0 +1,1 @@
+select * from ram.raw.emp where salary > 5000
