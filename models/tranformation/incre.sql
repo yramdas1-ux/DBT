@@ -1,11 +1,12 @@
 {{ config(
     materialized='incremental',
-    alias='emp_incremental'
+    alias='emp_incremental_1',
+    unique_key ='emp_id'
 ) }}
 
 SELECT *
 FROM ram.raw.emp
 
 {% if is_incremental() %}
-  WHERE hire_date > (SELECT MAX(hire_date) FROM {{ this }})
+  WHERE load_date > (SELECT MAX(load_date) FROM {{ this }})
 {% endif %}
